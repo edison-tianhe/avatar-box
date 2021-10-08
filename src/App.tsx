@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import NationalDemo from './assets/national/national-demo.webp'
+import HideOnScroll from './components/HideOnScroll';
+import CardMedia from './components/CardMedia';
+import National from './components/National';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <HideOnScroll />
+      <div style={{ maxWidth: 800, margin: '0 auto' }}>
+        <CardMedia
+          title="国庆头像"
+          image={NationalDemo}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <National />
+        </CardMedia >
+      </div>
+    </>
   );
 }
 
