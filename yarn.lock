@@ -1873,11 +1873,6 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/dom-to-image@^2.6.3":
-  version "2.6.3"
-  resolved "http://npm.taimei.com:80/@types%2fdom-to-image/-/dom-to-image-2.6.3.tgz#126baa1207767ad1633c01961d39b59659ed7db2"
-  integrity sha1-EmuqEgd2etFjPAGWHTm1llntfbI=
-
 "@types/eslint@^7.2.6":
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-7.2.6.tgz#5e9aff555a975596c03a98b59ecd103decc70c3c"
@@ -4391,11 +4386,6 @@ dom-serializer@0:
   dependencies:
     domelementtype "^2.0.1"
     entities "^2.0.0"
-
-dom-to-image@^2.6.0:
-  version "2.6.0"
-  resolved "http://npm.taimei.com:80/dom-to-image/-/dom-to-image-2.6.0.tgz#8a503608088c87b1c22f9034ae032e1898955867"
-  integrity sha1-ilA2CAiMh7HCL5A0rgMuGJiVWGc=
 
 domain-browser@^1.1.1:
   version "1.2.0"

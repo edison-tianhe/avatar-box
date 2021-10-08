@@ -2,11 +2,12 @@ import { ChangeEvent, useRef, useState } from 'react'
 
 import { styled } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import domtoimage from 'dom-to-image';
+import domtoimage from '../../lib/dom-to-image';
 
 import Flag from '../../assets/national/national-flag.jpg';
 import Icon from '../Icon';
+import Preview from '../Preview';
+import { getDevicePixelRatio } from '../../utils';
 import Setting from './setting';
 import styles from './index.module.css';
 
@@ -36,6 +37,7 @@ export default function National() {
   });
   const [showSetting, setShowSetting] = useState<boolean>(false);
   const [maskValues, setMaskValues] = useState<IInitMaskProps>(initMask);
+  const [downloadSrc, setDownloadSrc] = useState<string>('');
 
   const onFileChange = ({ target: { files } }: ChangeEvent<HTMLInputElement>) => {
     if (!files?.length) {
@@ -57,8 +59,9 @@ export default function National() {
     if (!avatarRef.current) {
       return;
     }
-    domtoimage.toPng(avatarRef.current)
+    domtoimage.toPng(avatarRef.current, { scale: getDevicePixelRatio() })
       .then(function (dataUrl: string) {
+        // setDownloadSrc(dataUrl.replace(/=+$/, ''));
         var link = document.createElement('a');
         link.download = '国庆头像.png';
         link.href = dataUrl;
@@ -66,7 +69,7 @@ export default function National() {
         link.remove();
       })
       .catch(function (error: any) {
-        console.error('oops, something went wrong!', error);
+        console.error(error);
       });
   }
 
@@ -80,6 +83,10 @@ export default function National() {
       WebkitMask: `linear-gradient(${values.deg}deg, red ${values.start}%, transparent ${values.end}%)`,
       mask: `linear-gradient(${values.deg}deg, red ${values.start}%, transparent ${values.end}%)`,
     })
+  }
+
+  const onClosePreview = () => {
+    setDownloadSrc('');
   }
 
   return (
@@ -109,9 +116,18 @@ export default function National() {
         下载头像
       </Button>
       {' '}
-      {avatarImage && <IconButton aria-label="setting" onClick={onSetting}>
-        <Icon code="&#xeb80;" />
-      </IconButton>}
+      {avatarImage && (
+        <Button
+          component="span"
+          size="small"
+          color="warning"
+          startIcon={<Icon code="&#xeb80;" style={{ fontSize: 14 }} />}
+          onClick={onSetting}
+        >
+          自定义
+        </Button>
+      )}
+      <Preview src={downloadSrc} onClose={onClosePreview} />
     </div>
   )
 }
